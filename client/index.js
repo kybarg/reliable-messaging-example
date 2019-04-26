@@ -139,6 +139,7 @@ for (let index = 0; index < 5; index++) {
     url: '/documents',
     method: 'POST',
     body: {
+      id: index,
       title: lorem.generateSentences(1),
       text: lorem.generateSentences(3),
     },
