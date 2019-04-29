@@ -85,9 +85,7 @@ let heartbeat_at = (new Date()).getTime() + HEARTBEAT_INTERVAL;
 
 backend.on('message', function () {
   handleHeartbeating();
-
   const msg = Array.apply(null, arguments);
-
 
   if (msg.length === 0)
     return;
@@ -97,28 +95,27 @@ backend.on('message', function () {
   const worker = new Worker(address);
   worker.ready(workers);
 
-  console.log('msg.length ', msg.length)
-
   //  Validate control message, or return reply to client
   if (msg.length == 1) {
     const frame = msg[0];
     const data = frame.toString();
-    console.log('W_HEARTBEAT ', data === MDP.W_HEARTBEAT)
-    console.log('W_READY ', data === MDP.W_READY)
 
     if (data !== MDP.W_READY && data !== MDP.W_HEARTBEAT) {
       console.log('E: invalid message from worker');
       console.log('msg', msg.map((arg) => arg.toString()))
     }
   }
-  else frontend.send(msg);
+  else {
+    console.log('msg from backend', msg.map((arg) => arg.toString()), (new Date()).getSeconds())
+    frontend.send(msg);
+  }
 })
 
 frontend.on('message', function () {
-  // handleHeartbeating();
+  handleHeartbeating();
   const msg = Array.apply(null, arguments);
 
-  // console.log('msg', msg.map((arg) => arg.toString()))
+  console.log('msg from frontend', msg.map((arg) => arg.toString()), (new Date()).getSeconds())
 
   if (msg.length === 0)
     return;
