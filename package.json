@@ -14,7 +14,7 @@
     "better-queue-sqlite": "^1.0.5",
     "body-parser": "^1.18.3",
     "event-to-promise": "^0.8.0",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "lorem-ipsum": "^2.0.1",
     "lowdb": "^1.0.0",
     "request": "^2.88.0",
